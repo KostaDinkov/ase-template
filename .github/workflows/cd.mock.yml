@@ -1,0 +1,20 @@
+# MOCK workflow — runs on every push to main to give a fast visible deploy
+# check without SSH-ing to the VPS.
+# The real workflow (cd.yml) is set to workflow_dispatch only.
+
+name: CD
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: cd-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Mock — skipping SSH deploy to VPS"

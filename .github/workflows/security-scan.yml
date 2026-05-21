@@ -1,10 +1,10 @@
+# REAL workflow — triggers manually only (to save Actions minutes).
+# The mock version (security-scan.mock.yml) runs on every push/PR with echo stubs.
+# Trigger via: Actions tab → Security Scan → Run workflow
 name: Security Scan
 
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   trivy:

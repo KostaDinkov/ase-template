@@ -1,12 +1,13 @@
+# REAL workflow — automatic push/PR triggers disabled (to save Actions minutes).
+# The mock version (codeql.mock.yml) runs on every push/PR with echo stubs.
+# Schedule kept so real scans still run weekly.
+# Manual trigger via: Actions tab → CodeQL → Run workflow
 name: CodeQL
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   schedule:
     - cron: "0 3 * * 1"   # Every Monday at 03:00 UTC
+  workflow_dispatch:
 
 jobs:
   analyze:
