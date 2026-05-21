@@ -27,7 +27,7 @@ jobs:
         run: docker build --target production -t scan-${{ matrix.service }}:ci ${{ matrix.path }}
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.31.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: scan-${{ matrix.service }}:ci
           format: table
