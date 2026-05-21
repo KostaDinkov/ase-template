@@ -1,0 +1,29 @@
+{
+  "recommendations": [
+    // Python
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "ms-python.debugpy",
+
+    // TypeScript / Next.js
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Git / GitHub
+    "github.vscode-pull-request-github",
+    "github.copilot",
+    "github.copilot-chat",
+
+    // YAML / config
+    "redhat.vscode-yaml",
+
+    // Env files
+    "mikestead.dotenv",
+
+    // Editor quality
+    "editorconfig.editorconfig"
+  ]
+}
