@@ -1,5 +1,3 @@
-import type { NextRequest } from "next/server";
-
-export function GET(_req: NextRequest) {
+export function GET() {
   return Response.json({ status: "ok" });
 }

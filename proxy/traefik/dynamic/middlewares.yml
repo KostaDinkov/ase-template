@@ -1,0 +1,40 @@
+# Traefik dynamic configuration — hot-reloaded without restart.
+
+http:
+  middlewares:
+    # Redirect HTTP → HTTPS (applied via entryPoint redirect in traefik.yml,
+    # kept here as an explicit middleware for services that need it directly)
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    # Security headers for all web services
+    secure-headers:
+      headers:
+        sslRedirect: true
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+        permissionsPolicy: "camera=(), microphone=(), geolocation=()"
+        customResponseHeaders:
+          X-Robots-Tag: "noindex, nofollow"
+
+    # Rate limiting — adjust burst/average for your traffic profile
+    rate-limit:
+      rateLimit:
+        burst: 50
+        average: 20
+
+    # Basic-auth template — generate with:
+    #   echo $(htpasswd -nB admin) | sed -e 's/\$/\$\$/g'
+    # Then set TRAEFIK_BASIC_AUTH_USERS in .env and uncomment:
+    # basic-auth:
+    #   basicAuth:
+    #     users:
+    #       - "${TRAEFIK_BASIC_AUTH_USERS}"

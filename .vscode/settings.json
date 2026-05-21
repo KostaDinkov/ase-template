@@ -1,0 +1,44 @@
+{
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.rulers": [88, 120],
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Python (services/api)
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+
+  // TypeScript / Next.js (services/frontend)
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // GitHub Copilot
+  "github.copilot.enable": {
+    "*": true
+  },
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.codeGeneration.instructions": [
+    { "file": ".github/instructions/general.instructions.md" }
+  ],
+
+  // File associations
+  "files.associations": {
+    "*.env.example": "dotenv",
+    "docker-compose*.yml": "dockercompose"
+  },
+
+  // Hide noisy folders from explorer
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.ruff_cache": true,
+    "**/.pytest_cache": true
+  }
+}
