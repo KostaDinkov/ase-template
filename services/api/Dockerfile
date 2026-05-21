@@ -3,7 +3,7 @@
 # ── Base ──────────────────────────────────────────────────────────────────────
 FROM python:3.13-slim AS base
 WORKDIR /app
-RUN addgroup --system app && adduser --system --ingroup app app
+RUN addgroup --system app && adduser --system --ingroup app app && chown app:app /app
 
 # ── Dependencies ──────────────────────────────────────────────────────────────
 FROM base AS deps
