@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # ── Add a job per service ────────────────────────────────────────────────────
+  # Services only need to expose GET /metrics (e.g. via prometheus_fastapi_instrumentator
+  # for Python or prom-client for Node). No changes to this file are required for
+  # services that push metrics via OTLP — the collector handles the remote write.
+
+  - job_name: api
+    static_configs:
+      - targets: ["api:8000"]
+    metrics_path: /metrics
+
+  - job_name: frontend
+    static_configs:
+      - targets: ["frontend:3000"]
+    metrics_path: /metrics
