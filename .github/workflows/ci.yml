@@ -54,7 +54,7 @@ jobs:
   # Add this job to the branch ruleset "required checks" so the gate is always
   # satisfied even when no service changed.
   ci-gate:
-    name: CI gate
+    name: ci-gate
     runs-on: ubuntu-latest
     needs: [api, frontend]
     if: always()
