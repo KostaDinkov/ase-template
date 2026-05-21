@@ -1,0 +1,60 @@
+name: Feature Spec
+description: PRD-style specification for a new feature. Assign to Copilot to implement.
+title: "feat: "
+labels: ["feature", "needs-spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in all sections before assigning to Copilot or starting implementation.
+        The more context you provide, the better the implementation will be.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One sentence describing what this feature does.
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: "As a [type of user], I want [goal] so that [benefit]."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Testable conditions that must be true for this feature to be complete.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-context
+    attributes:
+      label: Technical Context
+      description: Relevant files, services, APIs, data models, or constraints the implementer should know.
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of Scope
+      description: Explicitly list what this feature should NOT do or change.
+
+  - type: dropdown
+    id: assign-to-copilot
+    attributes:
+      label: Assign to Copilot?
+      description: Should this be assigned to GitHub Copilot cloud agent for implementation?
+      options:
+        - "Yes — assign to Copilot"
+        - "No — I will implement"
+    validations:
+      required: true

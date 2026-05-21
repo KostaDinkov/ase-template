@@ -1,0 +1,48 @@
+name: Architecture Decision Record
+description: Document a significant architectural or technical decision.
+title: "docs(adr): "
+labels: ["adr"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Decision Title
+      description: Short noun phrase describing what was decided (e.g. "Use FastAPI for the API service").
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Proposed
+        - Accepted
+        - Deprecated
+        - Superseded
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What situation, constraint, or problem forced this decision?
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision
+      description: What was decided and why? What alternatives were considered and rejected?
+    validations:
+      required: true
+
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequences
+      description: What becomes easier, harder, or different as a result of this decision?
+    validations:
+      required: true
