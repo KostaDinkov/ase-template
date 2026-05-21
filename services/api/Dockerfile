@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ── Base ──────────────────────────────────────────────────────────────────────
-FROM python:3.13-slim AS base
+FROM python:3.14-slim AS base
 WORKDIR /app
 RUN addgroup --system app && adduser --system --ingroup app app && chown app:app /app
 
