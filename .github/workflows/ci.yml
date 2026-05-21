@@ -35,7 +35,7 @@ jobs:
     name: API
     needs: changes
     if: needs.changes.outputs.api == 'true'
-    uses: ./.github/workflows/reusable/service-ci.yml
+    uses: ./.github/workflows/service-ci.yml
     with:
       service_name: api
       service_path: services/api
@@ -44,7 +44,7 @@ jobs:
     name: Frontend
     needs: changes
     if: needs.changes.outputs.frontend == 'true'
-    uses: ./.github/workflows/reusable/service-ci.yml
+    uses: ./.github/workflows/service-ci.yml
     with:
       service_name: frontend
       service_path: services/frontend
