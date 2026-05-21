@@ -32,11 +32,11 @@ node scripts/setup.js # copy .env.example → .env everywhere
 
 Edit the generated `.env` files:
 
-| File | Key variables |
-|------|--------------|
-| `.env` | `COMPOSE_PROJECT_NAME`, `DOMAIN`, `ACME_EMAIL` |
-| `services/api/.env` | service-specific vars |
-| `services/frontend/.env` | `NEXT_PUBLIC_API_URL` |
+| File                     | Key variables                                  |
+| ------------------------ | ---------------------------------------------- |
+| `.env`                   | `COMPOSE_PROJECT_NAME`, `DOMAIN`, `ACME_EMAIL` |
+| `services/api/.env`      | service-specific vars                          |
+| `services/frontend/.env` | `NEXT_PUBLIC_API_URL`                          |
 
 ### 3. Start the stack locally
 
@@ -44,19 +44,19 @@ Edit the generated `.env` files:
 docker compose up --build
 ```
 
-| Service | URL |
-|---------|-----|
-| API | http://localhost:8000 |
-| Frontend | http://localhost:3000 |
-| Grafana | http://localhost:3001 (with observability stack) |
+| Service  | URL                                              |
+| -------- | ------------------------------------------------ |
+| API      | http://localhost:8000                            |
+| Frontend | http://localhost:3000                            |
+| Grafana  | http://localhost:3001 (with observability stack) |
 
 ### 4. Add GitHub Secrets for CD
 
-| Secret | Value |
-|--------|-------|
-| `VPS_HOST` | IP or hostname of your VPS |
-| `VPS_USER` | SSH user |
-| `VPS_SSH_KEY` | Private SSH key (no passphrase) |
+| Secret            | Value                           |
+| ----------------- | ------------------------------- |
+| `VPS_HOST`        | IP or hostname of your VPS      |
+| `VPS_USER`        | SSH user                        |
+| `VPS_SSH_KEY`     | Private SSH key (no passphrase) |
 | `VPS_DEPLOY_PATH` | Absolute path to project on VPS |
 
 Create a `production` environment in **Settings → Environments** and add the secrets there.
@@ -127,16 +127,16 @@ Set `DOMAIN` and `ACME_EMAIL` in `.env` before running.
 
 ## CI/CD Overview
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `ci.yml` | PR | Path-filtered per-service test + lint + build |
-| `commitlint.yml` | PR | Enforce Conventional Commits |
-| `compose-validate.yml` | PR | Validate Docker Compose merges |
-| `codeql.yml` | PR / weekly | Static security analysis |
-| `security-scan.yml` | PR | Trivy CVE + gitleaks secret scan |
-| `cd.yml` | push to `main` | SSH deploy to VPS |
-| `release-please.yml` | push to `main` | Automated release PRs + CHANGELOG |
-| `pr-automation.yml` | PR | Label agent PRs, enable auto-merge |
+| Workflow               | Trigger        | Purpose                                       |
+| ---------------------- | -------------- | --------------------------------------------- |
+| `ci.yml`               | PR             | Path-filtered per-service test + lint + build |
+| `commitlint.yml`       | PR             | Enforce Conventional Commits                  |
+| `compose-validate.yml` | PR             | Validate Docker Compose merges                |
+| `codeql.yml`           | PR / weekly    | Static security analysis                      |
+| `security-scan.yml`    | PR             | Trivy CVE + gitleaks secret scan              |
+| `cd.yml`               | push to `main` | SSH deploy to VPS                             |
+| `release-please.yml`   | push to `main` | Automated release PRs + CHANGELOG             |
+| `pr-automation.yml`    | PR             | Label agent PRs, enable auto-merge            |
 
 ---
 

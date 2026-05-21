@@ -11,17 +11,17 @@ All meaningful work flows through GitHub Issues → feature branches → Pull Re
 
 Use one of the [issue templates](.github/ISSUE_TEMPLATE/):
 
-| Template | Use for |
-|----------|---------|
-| `feature_spec.yml` | New features (PRD-style with acceptance criteria) |
-| `agent_task.yml` | Direct Copilot task — focused, unambiguous, Definition of Done included |
-| `bug_report.yml` | Bugs with reproduction steps |
-| `adr.yml` | Architecture decisions you want to record |
+| Template           | Use for                                                                 |
+| ------------------ | ----------------------------------------------------------------------- |
+| `feature_spec.yml` | New features (PRD-style with acceptance criteria)                       |
+| `agent_task.yml`   | Direct Copilot task — focused, unambiguous, Definition of Done included |
+| `bug_report.yml`   | Bugs with reproduction steps                                            |
+| `adr.yml`          | Architecture decisions you want to record                               |
 
 ### 2. Assign the issue
 
 - Assign to **yourself** if you're implementing it directly.
-- Assign to **GitHub Copilot** (or use the *"Assign to Copilot"* button) for agentic implementation.
+- Assign to **GitHub Copilot** (or use the _"Assign to Copilot"_ button) for agentic implementation.
 
 ### 3. Branch
 
@@ -107,13 +107,13 @@ make build   # build the production image
 
 ## Docker Compose
 
-| File | Purpose |
-|------|---------|
-| `docker-compose.yml` | Base service definitions |
-| `docker-compose.override.yml` | Dev overrides (auto-loaded, bind mounts, hot reload) |
-| `docker-compose.prod.yml` | Production overrides (standalone, resource limits) |
-| `observability/docker-compose.observability.yml` | LGTM observability stack |
-| `proxy/docker-compose.proxy.yml` | Traefik reverse proxy |
+| File                                             | Purpose                                              |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `docker-compose.yml`                             | Base service definitions                             |
+| `docker-compose.override.yml`                    | Dev overrides (auto-loaded, bind mounts, hot reload) |
+| `docker-compose.prod.yml`                        | Production overrides (standalone, resource limits)   |
+| `observability/docker-compose.observability.yml` | LGTM observability stack                             |
+| `proxy/docker-compose.proxy.yml`                 | Traefik reverse proxy                                |
 
 Start everything locally:
 
@@ -134,6 +134,7 @@ npx lefthook install
 ```
 
 Hooks run automatically on `git commit`:
+
 - `commitlint` — validates the commit message format
 - `gitleaks` — scans the staged diff for secrets
 
@@ -141,18 +142,19 @@ Hooks run automatically on `git commit`:
 
 ## CI Checks (required for merge)
 
-| Check | Trigger | What it does |
-|-------|---------|-------------|
-| `commitlint` | PR | Validates all commit messages in the PR |
-| `ci-gate` | PR | Passes only when all per-service jobs pass |
-| `codeql` | PR / weekly | Static analysis for security vulnerabilities |
-| `security-scan` | PR | Trivy CVE scan + gitleaks secret scan |
+| Check           | Trigger     | What it does                                 |
+| --------------- | ----------- | -------------------------------------------- |
+| `commitlint`    | PR          | Validates all commit messages in the PR      |
+| `ci-gate`       | PR          | Passes only when all per-service jobs pass   |
+| `codeql`        | PR / weekly | Static analysis for security vulnerabilities |
+| `security-scan` | PR          | Trivy CVE scan + gitleaks secret scan        |
 
 ---
 
 ## Release Process
 
 Releases are automated by `release-please`:
+
 1. Conventional commits on `main` are parsed by `release-please`.
 2. A **Release PR** is automatically opened with a bumped version and updated `CHANGELOG.md`.
 3. Merge the Release PR → a GitHub Release is created.
@@ -161,9 +163,9 @@ Releases are automated by `release-please`:
 
 ## What NOT to Change Directly
 
-| Area | Reason |
-|------|--------|
-| `.github/workflows/` | Only modify when the task explicitly targets CI/CD |
-| `docker-compose.yml` (base) | Service topology changes need explicit discussion |
-| `CODEOWNERS` | Managed by the human developer |
-| Branch protection / ruleset | Managed via GitHub UI |
+| Area                        | Reason                                             |
+| --------------------------- | -------------------------------------------------- |
+| `.github/workflows/`        | Only modify when the task explicitly targets CI/CD |
+| `docker-compose.yml` (base) | Service topology changes need explicit discussion  |
+| `CODEOWNERS`                | Managed by the human developer                     |
+| Branch protection / ruleset | Managed via GitHub UI                              |

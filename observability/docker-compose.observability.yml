@@ -5,8 +5,8 @@ services:
     volumes:
       - ./otel-collector/config.yml:/etc/otel/config.yml:ro
     ports:
-      - "4317:4317"   # OTLP gRPC
-      - "4318:4318"   # OTLP HTTP
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
     networks:
       - observability
       - app
@@ -59,7 +59,7 @@ services:
       - ./tempo/config.yml:/etc/tempo/config.yml:ro
       - tempo_data:/var/tempo
     ports:
-      - "3200:3200"   # Tempo HTTP
+      - "3200:3200" # Tempo HTTP
     networks:
       - observability
     restart: unless-stopped

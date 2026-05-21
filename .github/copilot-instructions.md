@@ -36,17 +36,20 @@ Never invoke language runtimes (python, node, npm, pytest, ruff, etc.) directly 
 ## Code Style Rules
 
 ### General
+
 - Conventional Commits enforced: `type(scope): description` — types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`
 - No secrets or credentials committed — use `.env` files (gitignored) backed by `.env.example`
 - All Dockerfiles must: use multi-stage builds, non-root user (`app`), Alpine or slim base, `HEALTHCHECK`, and expose `GET /healthz → 200`
 
 ### Python (`services/api/`)
+
 - Formatter/linter: `ruff` (select E, F, I, UP; line-length 88)
 - Tests: `pytest` with `asyncio_mode = auto`
 - Framework: FastAPI; async handlers preferred
 - Dependencies managed via `uv` + `pyproject.toml`
 
 ### TypeScript/Next.js (`services/frontend/`)
+
 - Strict TypeScript (`strict: true` in tsconfig)
 - Next.js 15 App Router — use Server Components by default, `"use client"` only when needed
 - Tests: Jest + React Testing Library; setup file: `jest.setup.ts`
@@ -54,6 +57,7 @@ Never invoke language runtimes (python, node, npm, pytest, ruff, etc.) directly 
 - CSS: Tailwind (if added); no inline styles
 
 ### Scripts (`scripts/`)
+
 - Written with [zx](https://github.com/google/zx) v8, ESM (`.js` files)
 - Root `package.json` has `"type": "module"`
 
