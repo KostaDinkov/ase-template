@@ -1,0 +1,23 @@
+# Production overrides — used with: docker compose -f docker-compose.yml -f docker-compose.prod.yml up
+# No bind mounts, restart policies, resource limits, Traefik routing active
+
+services:
+  api:
+    build:
+      target: production
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+  frontend:
+    build:
+      target: production
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M

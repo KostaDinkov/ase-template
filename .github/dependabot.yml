@@ -1,0 +1,53 @@
+version: 2
+updates:
+  # Root Node.js (zx, commitlint, lefthook)
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+      - auto-merge
+
+  # API Python dependencies
+  - package-ecosystem: pip
+    directory: /services/api
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+      - auto-merge
+
+  # Frontend Node.js dependencies
+  - package-ecosystem: npm
+    directory: /services/frontend
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+      - auto-merge
+
+  # Docker base images — api
+  - package-ecosystem: docker
+    directory: /services/api
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+
+  # Docker base images — frontend
+  - package-ecosystem: docker
+    directory: /services/frontend
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+      - auto-merge

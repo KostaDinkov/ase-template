@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Detect which services changed ───────────────────────────────────────────
+  changes:
+    name: Detect changed services
+    runs-on: ubuntu-latest
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api:
+              - 'services/api/**'
+            frontend:
+              - 'services/frontend/**'
+
+  # ── Per-service CI (fan-out) ─────────────────────────────────────────────────
+  api:
+    name: API
+    needs: changes
+    if: needs.changes.outputs.api == 'true'
+    uses: ./.github/workflows/service-ci.yml
+    with:
+      service_name: api
+      service_path: services/api
+
+  frontend:
+    name: Frontend
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    uses: ./.github/workflows/service-ci.yml
+    with:
+      service_name: frontend
+      service_path: services/frontend
+
+  # ── Required status gate ─────────────────────────────────────────────────────
+  # This job always runs and succeeds only when all triggered service jobs pass.
+  # Add this job to the branch ruleset "required checks" so the gate is always
+  # satisfied even when no service changed.
+  ci-gate:
+    name: ci-gate
+    runs-on: ubuntu-latest
+    needs: [api, frontend]
+    if: always()
+    steps:
+      - name: Check all jobs passed
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" ]]; then
+            echo "One or more service CI jobs failed."
+            exit 1
+          fi
+          echo "All service CI jobs passed (or were skipped)."
