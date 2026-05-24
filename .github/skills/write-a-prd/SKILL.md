@@ -1,74 +1,102 @@
 ---
 name: write-a-prd
-description: Generate a PRD from the client brief and write it as a local markdown file in issues/. Use when the user wants to turn a client request into a structured PRD.
+description: >
+  Write a PRD (Product Requirements Document) from a product idea, client brief, or feature request.
+  Use when the user wants to plan a feature end-to-end, turn a vague idea into a structured spec,
+  says "write a PRD", "spec this out", "let's plan this feature", or wants to document requirements
+  before implementation. Produces docs/spec/{feature-name}.prd.md.
 ---
 
-This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
+## Workflow
 
-1. Ask the user for a long, detailed description of the problem they want to solve and any potential ideas for solutions.
+Progress through these phases in order. Skip a phase only if the information is already clear from context.
 
-2. Explore the repo to verify their assertions and understand the current state of the codebase.
+- [ ] Phase 1: Understand the brief
+- [ ] Phase 2: Explore the codebase
+- [ ] Phase 3: Interview the user
+- [ ] Phase 4: Sketch the modules
+- [ ] Phase 5: Write the PRD
+- [ ] Phase 6: Confirm with the user
 
-3. Interview the user relentlessly about every aspect of this plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
+---
 
-4. Sketch out the major modules you will need to build or modify to complete the implementation. Actively look for opportunities to extract deep modules that can be tested in isolation.
+## Phase 1 — Understand the brief
 
-A deep module (as opposed to a shallow module) is one which encapsulates a lot of functionality in a simple, testable interface which rarely changes.
+Ask the user for a detailed description of:
 
-Check with the user that these modules match their expectations. Check with the user which modules they want tests written for.
+- The problem they are trying to solve (from the user's perspective)
+- Any ideas they already have for the solution
+- Known constraints (timeline, tech stack, non-negotiables)
 
-5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD. The PRD should be written as a local markdown file at `issues/prd.md`. Create the `issues/` directory if it doesn't exist. Do NOT submit a GitHub issue or call any external service.
+If the user provided a full brief in their initial message, proceed directly to Phase 2.
 
-<prd-template>
+---
 
-## Problem Statement
+## Phase 2 — Explore the codebase
 
-The problem that the user is facing, from the user's perspective.
+Explore the repo to ground the design in reality before interviewing:
 
-## Solution
+- Read the README and any architecture documentation
+- Find existing code related to the feature area
+- Verify any assertions the user made about the current state
+- Note the patterns, conventions, and modules the feature should fit into
 
-The solution to the problem, from the user's perspective.
+---
 
-## User Stories
+## Phase 3 — Interview the user
 
-A LONG, numbered list of user stories. Each user story should be in the format of:
+Follow the `/grill-me` pattern: interview the user one question at a time, walking down each branch of the design tree. For each question, provide your recommended answer so the user can agree or redirect quickly.
 
-1. As an <actor>, I want a <feature>, so that <benefit>
+If a question can be answered by exploring the codebase (e.g. "does this pattern already exist?"), check first rather than asking.
 
-<user-story-example>
-1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
-</user-story-example>
+Stop when every significant design decision is resolved and no major open questions remain.
 
-This list of user stories should be extremely extensive and cover all aspects of the feature.
+SKIP this phase if the context already contains an ideation conversation with clear decisions
 
-## Implementation Decisions
+---
 
-A list of implementation decisions that were made. This can include:
+## Phase 4 — Sketch the modules
 
-- The modules that will be built/modified
-- The interfaces of those modules that will be modified
-- Technical clarifications from the developer
-- Architectural decisions
-- Schema changes
-- API contracts
-- Specific interactions
+Before writing, sketch the modules to build or modify:
 
-Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
+- Prefer deep modules: a small, stable interface that encapsulates significant complexity
+- Identify which modules can be tested in isolation
+- Flag which existing modules change vs. which are net-new
 
-## Testing Decisions
+Present the sketch to the user and confirm:
 
-A list of testing decisions that were made. Include:
+- Does this match their mental model?
+- Which modules should have tests?
+- Any missing pieces?
 
-- A description of what makes a good test (only test external behavior, not implementation details)
-- Which modules will be tested
-- Prior art for the tests (i.e. similar types of tests in the codebase)
+---
 
-## Out of Scope
+## Phase 5 — Write the PRD
 
-A description of the things that are out of scope for this PRD.
+Read the template from [assets/prd-template.md](assets/prd-template.md) and fill it in.
 
-## Further Notes
+Determine a feature name: a 2–4 word kebab-case slug (e.g. `user-auth`, `invoice-export`, `bulk-import`).
 
-Any further notes about the feature.
+Write the completed PRD to `docs/spec/{feature-name}.prd.md`. Create the `docs/spec/` directory if it does not exist.
 
-</prd-template>
+Do NOT create a GitHub issue and do NOT commit the file — just write it to disk.
+
+---
+
+## Phase 6 — Confirm with the user
+
+Tell the user the path of the file that was written. Ask:
+
+> "Does the PRD look right? Any sections to adjust before we move to issues?"
+
+If they request changes, edit the file in place — do not regenerate from scratch.
+
+---
+
+## Gotchas
+
+- Output path is `docs/spec/{feature-name}.prd.md` — **not** `issues/prd.md`.
+- Do not create a GitHub issue. The `/prd-to-issues` skill handles that as the next step.
+- Do not include specific file paths or code snippets in the PRD — they go stale quickly.
+- Write from the user's perspective, not from implementation internals.
+- If the user skips the interview ("just write a draft"), write a draft and explicitly mark open decisions with `<!-- TODO: confirm with user -->` so nothing is silently assumed.
