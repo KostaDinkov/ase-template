@@ -1,16 +1,17 @@
-pre-commit:
+commit-msg:
   commands:
     commitlint:
       run: npx commitlint --edit {1}
-      skip_if: git diff --cached --name-only | grep -qv "."
 
+pre-commit:
+  commands:
     gitleaks:
       run: >
         docker run --rm
-        -v "$(pwd):/path"
+        -v "{root}://repo"
         zricethezav/gitleaks:v8.27.2
         detect
-        --source /path
+        --source //repo
         --no-git
         --redact
         --log-level warn

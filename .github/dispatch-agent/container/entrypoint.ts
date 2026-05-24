@@ -159,7 +159,8 @@ interface ProjectConfig {
 }
 
 const CONFIG_PATH = "/workspace/agentic-workflow-config.json";
-let projectConfig: ProjectConfig;
+// Definite assignment: the catch block always calls process.exit(1)
+let projectConfig!: ProjectConfig;
 try {
   projectConfig = JSON.parse(
     readFileSync(CONFIG_PATH, "utf-8"),
