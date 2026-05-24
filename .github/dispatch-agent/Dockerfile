@@ -1,16 +1,10 @@
 FROM node:lts
 
-# Build tools for native modules (better-sqlite3)
 RUN apt-get update && apt-get install -y \
-    python3 \
-    make \
-    g++ \
     git \
     jq \
     curl \
     && rm -rf /var/lib/apt/lists/*
-
-RUN npm install -g pnpm@11
 
 # Install GitHub CLI
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
@@ -21,8 +15,8 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     && apt-get update && apt-get install -y gh \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Copilot CLI + TypeScript runtime (executables only)
-RUN npm install -g @github/copilot tsx
+# Install Copilot CLI, TypeScript runtime, and zx (required by entrypoint.ts)
+RUN npm install -g @github/copilot tsx zx
 
 ARG CACHE_BUST=1
 RUN echo "cache bust: $CACHE_BUST" > /dev/null

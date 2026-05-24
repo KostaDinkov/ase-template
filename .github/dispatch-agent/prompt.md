@@ -36,7 +36,7 @@ Use /tdd to complete the task.
 
 # FEEDBACK LOOPS
 
-Before committing, run the feedback loops using the commands from `dispatch-agent.config.json` (`test` and `typecheck` fields):
+Before committing, run the feedback loops using the commands from `agentic-workflow-config.json` (`test` and `typecheck` fields):
 
 - Run the test command
 - Run the typecheck command

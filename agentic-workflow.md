@@ -127,7 +127,7 @@ After the pipeline succeeds, a pull request is opened automatically. The PR body
 
 ## Configuration
 
-All project-specific settings live in **`dispatch-agent.config.json`** at the repo root. This is the only file you need to edit when setting up the workflow in a new project.
+All project-specific settings live in **`agentic-workflow-config.json`** at the repo root. This is the only file you need to edit when setting up the workflow in a new project.
 
 ```json
 {
@@ -151,7 +151,7 @@ The `context` field is the main lever for steering agent behaviour. A good conte
 - Naming and testing conventions
 - Package manager
 
-If `dispatch-agent.config.json` is missing, the container exits immediately with an error pointing to this file.
+If `agentic-workflow-config.json` is missing, the container exits immediately with an error pointing to this file.
 
 ---
 
@@ -167,7 +167,6 @@ Everything in `.github/` is generic and ready to use in any Node.js project:
 | `.github/dispatch-agent/prompt-issue.md` | Implementer specialist instructions (generic) |
 | `.github/dispatch-agent/prompt-code-review.md` | Code reviewer specialist instructions (generic) |
 | `.github/dispatch-agent/prompt-qa.md` | QA specialist instructions (generic) |
-| `.github/dispatch-agent/prompt.md` | Local VS Code Copilot inline prompt for manual agent sessions |
 | `.github/skills/grill-me/` | Ideation interview skill |
 | `.github/skills/write-a-prd/` | PRD generation skill |
 | `.github/skills/prd-to-issues/` | PRD → GitHub Issues skill |
@@ -186,7 +185,7 @@ Everything in `.github/` is generic and ready to use in any Node.js project:
 ## Setting up in a new project
 
 1. Copy the `.github/` folder into your repo root.
-2. Create `dispatch-agent.config.json` at the repo root and fill in the four fields.
+2. Create `agentic-workflow-config.json` at the repo root and fill in the four fields.
 3. Build the Docker image: `docker build -t dispatch-agent ./.github/dispatch-agent`
 4. Create the three GitHub labels: `afk`, `hitl`, `blocked`.
 5. Start the workflow at Step 1.

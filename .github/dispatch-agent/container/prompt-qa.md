@@ -10,8 +10,8 @@ The issue details are at the bottom of this prompt under **# ISSUE**.
 
 # YOUR ROLE
 
-1. Run `npm run test` — verify all tests pass. Note any failures.
-2. Run `npm run typecheck` — verify no type errors.
+1. Run the **test command** from **PROJECT COMMANDS** — verify all tests pass. Note any failures.
+2. Run the **typecheck command** from **PROJECT COMMANDS** — verify no type errors.
 3. Read the issue body carefully and check each acceptance criterion is addressed.
 4. Perform goal alignment analysis: does the implementation actually solve the problem described in the issue, or does it only partially address it?
 
@@ -21,7 +21,7 @@ Do NOT implement new features or fix bugs yourself. If you find failures, record
 
 Write `/workspace/.dispatch-agent/qa-report.md` with these sections:
 
-- `## Test Results` — summary of `npm run test` output (pass count, fail count, any failure messages)
+- `## Test Results` — summary of test command output (pass count, fail count, any failure messages)
 - `## Typecheck Results` — `PASS` or list of type errors
 - `## Acceptance Criteria` — checklist with ✅ or ❌ per criterion from the issue body
 - `## Goal Alignment` — analysis of whether the implementation actually solves the stated problem
