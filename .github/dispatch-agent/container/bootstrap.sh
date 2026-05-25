@@ -33,6 +33,6 @@ git -C /workspace checkout "${BRANCH}" 2>/dev/null || true
 
 # ---------------------------------------------------------------------------
 # Hand off — exec replaces this shell with tsx (entrypoint becomes PID 1)
-# Project dependency installation is handled by entrypoint.ts via agentic-workflow-config.json
+# Project dependency installation is handled by entrypoint.ts via .agentic-workflow-config.json
 # ---------------------------------------------------------------------------
 exec tsx /workspace/.github/dispatch-agent/container/entrypoint.ts

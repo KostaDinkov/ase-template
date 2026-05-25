@@ -158,7 +158,7 @@ interface ProjectConfig {
   context: string;
 }
 
-const CONFIG_PATH = "/workspace/agentic-workflow-config.json";
+const CONFIG_PATH = "/workspace/.agentic-workflow-config.json";
 // Definite assignment: the catch block always calls process.exit(1)
 let projectConfig!: ProjectConfig;
 try {
@@ -167,7 +167,7 @@ try {
   ) as ProjectConfig;
 } catch {
   console.error(
-    `ERROR: agentic-workflow-config.json not found at ${CONFIG_PATH}`,
+    `ERROR: .agentic-workflow-config.json not found at ${CONFIG_PATH}`,
   );
   console.error(
     "Create this file in your repo root — see .github/dispatch-agent/dispatch.readme.md",
