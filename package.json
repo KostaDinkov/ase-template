@@ -9,7 +9,7 @@
     "validate-env": "node scripts/validate-env.js"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^26.1.0",
     "zx": "^8.0.0",
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",
